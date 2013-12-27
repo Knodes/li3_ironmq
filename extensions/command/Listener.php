@@ -46,7 +46,7 @@ class Listener extends \lithium\console\Command {
             {
                 $this->out( "IronMQ Listener: found message $m->id on queue '$queueName'" );
 
-                $this->handle( $m->body );
+                $this->handle( $m->body , $queueName );
                 $this->out( "IronMQ Listener: handled message $m->id on queue '$queueName'" );
 
                 Queue::deleteMessage( $queueName, $m->id );
@@ -63,8 +63,9 @@ class Listener extends \lithium\console\Command {
      * example of how to handle received messages
      * most likely you'd want to inherit from this class and implement your own handle method
      * @param  string $payload payload of message as received in message->body
+     * @param  string $queue the name of the current queue
      */
-    protected function handle( $payload )
+    protected function handle( $payload , $queue)
     {
         $this->out( $payload );
         return;
