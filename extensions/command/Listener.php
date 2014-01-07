@@ -72,4 +72,10 @@ class Listener extends \lithium\console\Command {
     }
 
 
+    public function out($output = null, $options = array('nl' => 1)) {
+        $now = new \DateTime();
+        $ts = $now->format( 'Y-m-d H:i:s ' );
+        return $this->_response('output', $ts . $output, $options);
+    }
+
 }
