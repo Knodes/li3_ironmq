@@ -8,8 +8,20 @@ use li3_ironmq\core\Queue;
 
 class Listener extends \lithium\console\Command {
 
-    public function run( $queueName=null, $interval = 5)
+    public function run( $interval = 5, $queueName=null )
     {
+        if( !is_numeric( $interval ) )
+        {
+            $this->out( "IronMQ Listener: {:error}Please supply a numeric value as interval (got $interval).{:end}" );
+            return false;
+        }
+
+        if( $interval < 0.1 )
+        {
+            $this->out( "IronMQ Listener: {:error} Interval has to be at least 0.1 (got $interval).{:end}" );
+            return false;
+        }
+
         if( empty( $queueName ) )
         {
             $this->out( "IronMQ Listener: {:error}Please supply a queue name to listen to.{:end}" );
