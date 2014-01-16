@@ -66,6 +66,7 @@ class Listener extends \lithium\console\Command {
 
             }
 
+            $this->out( "IronMQ Listener: waiting $interval seconds" );
             usleep( $interval * 1000000 );
         }
 
