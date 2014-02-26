@@ -65,9 +65,12 @@ class Listener extends \lithium\console\Command {
                 $this->out( "IronMQ Listener: deleted message $m->id on queue '$queueName'" );
 
             }
+            else
+            {
+                $this->out( "IronMQ Listener: waiting $interval seconds" );
+                usleep( $interval * 1000000 );
+            }
 
-            $this->out( "IronMQ Listener: waiting $interval seconds" );
-            usleep( $interval * 1000000 );
         }
 
     }
